@@ -80,6 +80,11 @@ def delete_dirs(dirs: list[Path]):
     total = len(dirs)
     for i, d in enumerate(dirs, 1):
         print_progress(i, total)
-        if d.is_dir():
-            shutil.rmtree(d, ignore_errors=True)
+        if not d.is_dir():
+            continue
+        for child in d.iterdir():
+            if child.is_dir():
+                shutil.rmtree(child, ignore_errors=True)
+            else:
+                child.unlink(missing_ok=True)
     print()
