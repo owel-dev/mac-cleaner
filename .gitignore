@@ -1,0 +1,17 @@
+# ai
+.claude
+
+# Python
+__pycache__/
+.venv/
+venv/
+.env
+
+# macOS
+.DS_Store
+
+# 에디터
+.vscode/
+.idea/
+*.swp
+*.swo
