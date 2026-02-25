@@ -19,6 +19,12 @@ def main():
                 continue
             utils.print_subitem(i, j, d["name"], utils.get_dir_usage(d["dir"]), d["description"])
 
+    if utils.confirm(utils.colored("모두 삭제하시겠습니까?", "yellow")):
+        utils.delete_dirs(all_dirs)
+        print(utils.colored("\n=== 삭제 완료! ===\n", "cyan"))
+    else:
+        print(utils.colored("\n=== 작업 취소 ===\n", "gray"))
+
 
 if __name__ == "__main__":
     main()
