@@ -19,3 +19,7 @@ pip install pyyaml
 - `mac_cleaner.py` — 진입점
 - `utils.py` — 유틸리티 함수
 - `config.yaml` — 앱별 캐시 경로 설정
+
+## 라이센스
+
+[MIT License](LICENSE)
