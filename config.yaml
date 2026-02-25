@@ -35,12 +35,6 @@ apps:
         dir: ~/.npm/_cacache/content-v2
         description: "패키지 소스 및 바이너리 실제 데이터"
 
-  - name: "📝 Notion"
-    dirs:
-      - name: Partitions
-        dir: ~/Library/Application Support/Notion/Partitions
-        description: "오프라인 콘텐츠·웹 리소스 캐시"
-
   - name: "🌐 Chrome"
     dirs:
       - name: Cache
