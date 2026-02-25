@@ -11,7 +11,7 @@ python3 mac_cleaner.py
 ## 요구사항
 
 ```bash
-pip install pyyaml
+pip install -r requirements.txt
 ```
 
 ## 파일 구조
