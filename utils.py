@@ -1,6 +1,7 @@
 import os
 import sys
 import subprocess
+import unicodedata
 from pathlib import Path
 
 
@@ -28,11 +29,15 @@ def print_header(label: str, usage: str):
     print(colored(f"{label} : {usage}", "cyan"))
     print(colored("──────────────────────────────────", "cyan"))
 
+def _ljust_display(s: str, width: int) -> str:
+    dw = sum(2 if unicodedata.east_asian_width(c) in ("W", "F") else 1 for c in s)
+    return s + " " * max(0, width - dw)
+
 def print_item(i: int, name: str, usage: str):
-    print(f"{colored(f'{i}. {name:<13}', 'bold')}: {usage}")
+    print(f"{colored(f'{i}. {_ljust_display(name, 13)}', 'bold')}: {usage}")
 
 def print_subitem(i: int, j: int, name: str, usage: str, description: str):
-    print(colored(f"   {i}-{j}. {name:<20}: {usage:<6}  {description}", "gray"))
+    print(colored(f"   {i}-{j}. {_ljust_display(name, 20)}: {_ljust_display(usage, 6)}  {description}", "gray"))
 
 def get_dir_usage(path: Path) -> str:
     if not path.is_dir():
@@ -52,18 +57,21 @@ def get_dirs_usage(paths: list[Path]) -> str:
 def load_config() -> list:
     with open(CONFIG_PATH) as f:
         config = yaml.safe_load(f)
-    items = []
-    for item in config["apps"]:
-        dirs = [
-            {
-                "name": d.get("name"),
-                "dir": Path(os.path.expanduser(d["dir"])),
-                "description": d.get("description", ""),
-            }
-            for d in item["dirs"]
-        ]
-        items.append({"name": item["name"], "dirs": dirs})
-    return items
+    categories = []
+    for cat in config["categories"]:
+        apps = []
+        for item in cat["apps"]:
+            dirs = [
+                {
+                    "name": d.get("name"),
+                    "dir": Path(os.path.expanduser(d["dir"])),
+                    "description": d.get("description", ""),
+                }
+                for d in item["dirs"]
+            ]
+            apps.append({"name": item["name"], "dirs": dirs})
+        categories.append({"name": cat["name"], "apps": apps})
+    return categories
 
 def confirm(msg: str) -> bool:
     answer = input(f"\n{msg} [Y/n]: ").strip().lower()

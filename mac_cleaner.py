@@ -2,22 +2,26 @@ import utils
 
 
 def main():
-    items = utils.load_config()
+    categories = utils.load_config()
 
-    all_dirs = [d["dir"] for item in items for d in item["dirs"]]
-    total = utils.get_dirs_usage(all_dirs)
+    all_dirs = [d["dir"] for cat in categories for item in cat["apps"] for d in item["dirs"]]
 
-    utils.print_header("캐시 사용량", total)
+    item_num = 1
+    for cat in categories:
+        cat_dirs = [d["dir"] for item in cat["apps"] for d in item["dirs"]]
+        cat_total = utils.get_dirs_usage(cat_dirs)
+        utils.print_header(cat["name"], cat_total)
+        for item in cat["apps"]:
+            dirs = [d["dir"] for d in item["dirs"]]
+            usage = utils.get_dir_usage(dirs[0]) if len(dirs) == 1 else utils.get_dirs_usage(dirs)
+            utils.print_item(item_num, item["name"], usage)
 
-    for i, item in enumerate(items, 1):
-        dirs = [d["dir"] for d in item["dirs"]]
-        usage = utils.get_dir_usage(dirs[0]) if len(dirs) == 1 else utils.get_dirs_usage(dirs)
-        utils.print_item(i, item["name"], usage)
+            for j, d in enumerate(item["dirs"], 1):
+                if not d["name"]:
+                    continue
+                utils.print_subitem(item_num, j, d["name"], utils.get_dir_usage(d["dir"]), d["description"])
 
-        for j, d in enumerate(item["dirs"], 1):
-            if not d["name"]:
-                continue
-            utils.print_subitem(i, j, d["name"], utils.get_dir_usage(d["dir"]), d["description"])
+            item_num += 1
 
     if utils.confirm(utils.colored("모두 삭제하시겠습니까?", "yellow")):
         utils.delete_dirs(all_dirs)
