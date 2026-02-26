@@ -1,72 +1,72 @@
 categories:
   - name: "🌐 브라우저 캐시"
-    apps:
+    items:
       - name: "🌐 Chrome"
-        dirs:
+        paths:
           - name: Cache
-            dir: ~/Library/Caches/Google/Chrome/Default/Cache
-            description: "네트워크 리소스 캐시"
+            path: ~/Library/Caches/Google/Chrome/Default/Cache
+            note: "네트워크 리소스 캐시"
           - name: Code Cache
-            dir: ~/Library/Caches/Google/Chrome/Default/Code Cache
-            description: "JS/WebAssembly 바이트코드 캐시"
+            path: ~/Library/Caches/Google/Chrome/Default/Code Cache
+            note: "JS/WebAssembly 바이트코드 캐시"
 
       - name: "🦊 Firefox"
-        dirs:
+        paths:
           - name: Profiles
-            dir: ~/Library/Caches/Firefox/Profiles
-            description: "프로필별 네트워크 리소스 캐시"
+            path: ~/Library/Caches/Firefox/Profiles
+            note: "프로필별 네트워크 리소스 캐시"
 
   - name: "💻 앱 캐시"
-    apps:
+    items:
       - name: "💻 VSCode"
-        dirs:
+        paths:
           - name: Cache
-            dir: ~/Library/Application Support/Code/Cache
-            description: "웹뷰 및 네트워크 리소스 캐시"
+            path: ~/Library/Application Support/Code/Cache
+            note: "웹뷰 및 네트워크 리소스 캐시"
           - name: CachedData
-            dir: ~/Library/Application Support/Code/CachedData
-            description: "확장 바이트코드 캐시 — 재시작 속도 향상용"
+            path: ~/Library/Application Support/Code/CachedData
+            note: "확장 바이트코드 캐시 — 재시작 속도 향상용"
           - name: CachedExtensionVSIXs
-            dir: ~/Library/Application Support/Code/CachedExtensionVSIXs
-            description: "설치된 확장 패키지 원본 — 삭제해도 무방"
+            path: ~/Library/Application Support/Code/CachedExtensionVSIXs
+            note: "설치된 확장 패키지 원본 — 삭제해도 무방"
 
       - name: "💬 Slack"
-        dirs:
+        paths:
           - name: Cache_Data
-            dir: ~/Library/Application Support/Slack/Cache/Cache_Data
-            description: "채널 이미지·파일 등 네트워크 리소스 캐시"
+            path: ~/Library/Application Support/Slack/Cache/Cache_Data
+            note: "채널 이미지·파일 등 네트워크 리소스 캐시"
 
       - name: "🐳 Docker"
-        dirs:
+        paths:
           - name: Data
-            dir: ~/Library/Containers/com.docker.docker/Data
-            description: "컨테이너 이미지·볼륨·로그 데이터"
+            path: ~/Library/Containers/com.docker.docker/Data
+            note: "컨테이너 이미지·볼륨·로그 데이터"
 
   - name: "📦 패키지 관리도구 캐시"
-    apps:
+    items:
       - name: "🍺 Homebrew"
-        dirs:
+        paths:
           - name: downloads
-            dir: ~/Library/Caches/Homebrew/downloads
-            description: "패키지 설치 파일 (.tar.gz 등) — brew cleanup으로 정리 가능"
+            path: ~/Library/Caches/Homebrew/downloads
+            note: "패키지 설치 파일 (.tar.gz 등) — brew cleanup으로 정리 가능"
           - name: api
-            dir: ~/Library/Caches/Homebrew/api
-            description: "패키지 목록 및 버전 정보 캐시"
+            path: ~/Library/Caches/Homebrew/api
+            note: "패키지 목록 및 버전 정보 캐시"
           - name: Cask
-            dir: ~/Library/Caches/Homebrew/Cask
-            description: "GUI 앱 설치 파일 (DMG, ZIP 등)"
+            path: ~/Library/Caches/Homebrew/Cask
+            note: "GUI 앱 설치 파일 (DMG, ZIP 등)"
 
       - name: "📦 npm"
-        dirs:
+        paths:
           - name: content-v2
-            dir: ~/.npm/_cacache/content-v2
-            description: "패키지 소스 및 바이너리 실제 데이터"
+            path: ~/.npm/_cacache/content-v2
+            note: "패키지 소스 및 바이너리 실제 데이터"
 
       - name: "🐍 pip"
-        dirs:
+        paths:
           - name: http
-            dir: ~/Library/Caches/pip/http
-            description: "패키지 HTTP 캐시 (구버전)"
+            path: ~/Library/Caches/pip/http
+            note: "패키지 HTTP 캐시 (구버전)"
           - name: http-v2
-            dir: ~/Library/Caches/pip/http-v2
-            description: "패키지 HTTP 캐시 (현재)"
+            path: ~/Library/Caches/pip/http-v2
+            note: "패키지 HTTP 캐시 (현재)"

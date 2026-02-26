@@ -36,8 +36,8 @@ def _ljust_display(s: str, width: int) -> str:
 def print_item(i: int, name: str, usage: str):
     print(f"{colored(f'{i}. {_ljust_display(name, 13)}', 'bold')}: {usage}")
 
-def print_subitem(i: int, j: int, name: str, usage: str, description: str):
-    print(colored(f"   {i}-{j}. {_ljust_display(name, 20)}: {_ljust_display(usage, 6)}  {description}", "gray"))
+def print_subitem(i: int, j: int, name: str, usage: str, note: str):
+    print(colored(f"   {i}-{j}. {_ljust_display(name, 20)}: {_ljust_display(usage, 6)}  {note}", "gray"))
 
 def get_dir_usage(path: Path) -> str:
     if not path.is_dir():
@@ -59,18 +59,18 @@ def load_config() -> list:
         config = yaml.safe_load(f)
     categories = []
     for cat in config["categories"]:
-        apps = []
-        for item in cat["apps"]:
-            dirs = [
+        items = []
+        for item in cat["items"]:
+            paths = [
                 {
                     "name": d.get("name"),
-                    "dir": Path(os.path.expanduser(d["dir"])),
-                    "description": d.get("description", ""),
+                    "path": Path(os.path.expanduser(d["path"])),
+                    "note": d.get("note", ""),
                 }
-                for d in item["dirs"]
+                for d in item["paths"]
             ]
-            apps.append({"name": item["name"], "dirs": dirs})
-        categories.append({"name": cat["name"], "apps": apps})
+            items.append({"name": item["name"], "paths": paths})
+        categories.append({"name": cat["name"], "items": items})
     return categories
 
 def confirm(msg: str) -> bool:
