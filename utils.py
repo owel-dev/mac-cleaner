@@ -3,6 +3,7 @@ import sys
 import subprocess
 import unicodedata
 from pathlib import Path
+import shutil
 
 
 try:
@@ -84,7 +85,7 @@ def print_progress(current: int, total: int):
     print(f"\r삭제중... [{bar}] {current}/{total}", end="", flush=True)
 
 def delete_dirs(dirs: list[Path]):
-    import shutil
+    print()
     total = len(dirs)
     for i, d in enumerate(dirs, 1):
         print_progress(i, total)
